@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'quizBrian.dart';
+
+QuizBrain qb = QuizBrain();
 
 void main() {
   runApp(const QuizzApp());
@@ -13,13 +16,14 @@ class QuizzApp extends StatefulWidget {
 
 class _QuizzAppState extends State<QuizzApp> {
   List<Icon> suiviScore = [];
-  List<String> questions = [
+  /* List<String> questions = [
     "Le piton des neiges est un volcan de la Réunion",
     "Flutter permet de faire des applications web également",
     "PHP est le langage utilisé par flutter",
     "The end"
   ];
-  List<bool> reponses = [true, true, false];
+  List<bool> reponses = [true, true, false]; */
+
   int questionNumber = 0;
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class _QuizzAppState extends State<QuizzApp> {
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Center(
                       child: Text(
-                        questions[questionNumber],
+                        qb.questions[questionNumber].enonce,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 25.0),
                       ),
@@ -56,7 +60,7 @@ class _QuizzAppState extends State<QuizzApp> {
                           backgroundColor:
                               MaterialStateProperty.all<Color>(Colors.green)),
                       onPressed: () {
-                        bool bonnereponse = reponses[questionNumber];
+                        bool bonnereponse = qb.questions[questionNumber].reponse;
                         setState(() {
                           if (bonnereponse == false) {
                             suiviScore
@@ -86,7 +90,7 @@ class _QuizzAppState extends State<QuizzApp> {
                           backgroundColor:
                               MaterialStateProperty.all<Color>(Colors.red)),
                       onPressed: () {
-                        bool bonnereponse = reponses[questionNumber];
+                        bool bonnereponse = qb.questions[questionNumber].reponse;
                         setState(() {
                           if (bonnereponse == true) {
                             suiviScore
