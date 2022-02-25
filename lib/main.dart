@@ -12,6 +12,12 @@ class QuizzApp extends StatefulWidget {
 }
 
 class _QuizzAppState extends State<QuizzApp> {
+  List<Icon> suiviScore = [
+    Icon(Icons.check, color: Colors.green),
+    Icon(Icons.check, color: Colors.green),
+    Icon(Icons.close, color: Colors.red),
+    Icon(Icons.close, color: Colors.red),
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -72,10 +78,7 @@ class _QuizzAppState extends State<QuizzApp> {
                   ),
                 ),
                 Row(
-                  children: [
-                    Icon(Icons.check, color: Colors.green),
-                    Icon(Icons.close, color: Colors.red)
-                  ],
+                  children: suiviScore,
                 )
               ]),
         ),
