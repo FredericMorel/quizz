@@ -17,19 +17,68 @@ class _QuizzAppState extends State<QuizzApp> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
-        body: Column(children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Text(
-              "Question super difficile !?",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          TextButton(
-            onPressed: () => {print("hello")},
-            child: Text("Vrai"),
-          ),
-        ]),
+        body: SafeArea(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                /* Texte principal */
+
+                Expanded(
+                  flex: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Center(
+                      child: Text(
+                        "Question super difficile !?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 25.0),
+                      ),
+                    ),
+                  ),
+                ),
+
+                /* Bouton vrai */
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.green)),
+                      onPressed: () => {print("hello")},
+                      child: Text(
+                        "Vrai",
+                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                      ),
+                    ),
+                  ),
+                ),
+
+                /* Bouton Faux */
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.red)),
+                      onPressed: () => {print("hello")},
+                      child: Text(
+                        "Faux",
+                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.check, color: Colors.green),
+                    Icon(Icons.close, color: Colors.red)
+                  ],
+                )
+              ]),
+        ),
       ),
     );
   }
