@@ -16,15 +16,21 @@ class QuizzApp extends StatefulWidget {
 
 class _QuizzAppState extends State<QuizzApp> {
   List<Icon> suiviScore = [];
-  /* List<String> questions = [
-    "Le piton des neiges est un volcan de la Réunion",
-    "Flutter permet de faire des applications web également",
-    "PHP est le langage utilisé par flutter",
-    "The end"
-  ];
-  List<bool> reponses = [true, true, false]; */
 
-  int questionNumber = 0;
+  checkAnswer(bool x) {
+    bool bonnereponse = qb.getQuestionReponse();
+    setState(() {
+      //if (suiviScore.length != qb.)
+      if (bonnereponse == x) {
+        suiviScore.add(Icon(Icons.close, color: Colors.red));
+      } else {
+        suiviScore.add(Icon(Icons.check, color: Colors.green));
+      }
+
+      qb.nextQuestion();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,7 +49,7 @@ class _QuizzAppState extends State<QuizzApp> {
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Center(
                       child: Text(
-                        qb.questions[questionNumber].enonce,
+                        qb.getQuestionEnonce(),
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 25.0),
                       ),
@@ -60,18 +66,7 @@ class _QuizzAppState extends State<QuizzApp> {
                           backgroundColor:
                               MaterialStateProperty.all<Color>(Colors.green)),
                       onPressed: () {
-                        bool bonnereponse = qb.questions[questionNumber].reponse;
-                        setState(() {
-                          if (bonnereponse == false) {
-                            suiviScore
-                                .add(Icon(Icons.close, color: Colors.red));
-                          } else {
-                            suiviScore
-                                .add(Icon(Icons.check, color: Colors.green));
-                          }
-
-                          questionNumber++;
-                        });
+                        checkAnswer(true);
                       },
                       child: Text(
                         "Vrai",
@@ -90,18 +85,7 @@ class _QuizzAppState extends State<QuizzApp> {
                           backgroundColor:
                               MaterialStateProperty.all<Color>(Colors.red)),
                       onPressed: () {
-                        bool bonnereponse = qb.questions[questionNumber].reponse;
-                        setState(() {
-                          if (bonnereponse == true) {
-                            suiviScore
-                                .add(Icon(Icons.close, color: Colors.red));
-                          } else {
-                            suiviScore
-                                .add(Icon(Icons.check, color: Colors.green));
-                          }
-
-                          questionNumber++;
-                        });
+                        checkAnswer(false);
                       },
                       child: Text(
                         "Faux",
